@@ -1,7 +1,14 @@
 <template>
-    <main class="card">
-        <h1>Hello, World!</h1>
-        <p>{name}'s Salesforce portfolio, built with Lightning Web Components.</p>
-        <button onclick={handleClick}>Clicked {clicks} times</button>
+    <main>
+        <header class="hero">
+            <h1>{name}</h1>
+            <p>Salesforce Developer · Experience Cloud · LWC · Integrations</p>
+        </header>
+
+        <section class="grid">
+            <template for:each={projects} for:item="project">
+                <my-project-card key={project.id} project={project}></my-project-card>
+            </template>
+        </section>
     </main>
 </template>
