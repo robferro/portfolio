@@ -26,7 +26,8 @@ export default {
             'process.env.NODE_ENV': JSON.stringify('production'),
             preventAssignment: true
         }),
-        lwc({ modules: [{ dir: 'src/modules' }] }),
+        // dir is relative to rootDir (src/)
+        lwc({ rootDir: 'src', modules: [{ dir: 'modules' }] }),
         copyHtml()
     ]
 };
