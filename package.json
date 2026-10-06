@@ -1,0 +1,16 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -c -w"
+  },
+  "devDependencies": {
+    "@lwc/rollup-plugin": "^8.0.0",
+    "@rollup/plugin-replace": "^6.0.0",
+    "lwc": "^8.0.0",
+    "rollup": "^4.0.0"
+  }
+}
