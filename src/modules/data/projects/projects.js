@@ -32,36 +32,41 @@ const projects = [
     {
         id: 'case-access-delegation',
         title: 'Case Access Delegation',
-        context: 'PointClickCare · Healthcare SaaS · Support Portal',
-        role: 'Lead Developer',
-        years: '[TODO: year(s)]',
-        tags: ['LWC', 'Lightning Datatable', 'Apex', 'Sharing Model', 'Experience Cloud'],
-        headline: '[TODO: headline result]',
+        context: 'PointClickCare · Support Portal',
+        role: 'Senior Developer',
+        years: '2025',
+        tags: ['Aura', 'Datatable', 'Apex', 'Sharing Model', 'Experience Cloud'],
+        headline: 'Most requested Support Portal feature, now used by 300+ executives',
         challenge:
-            '[TODO: e.g. executive users needed to give colleagues visibility into specific cases without admin involvement.]',
+            'Customers operate complex organization structures, with a parent organization and many facilities beneath it, but portal users could only see the cases they had opened themselves. Leaders had no visibility into support activity across their organization, and extending access to colleagues meant asking PointClickCare to do it for them.',
         approach: [
-            'Designed and developed an LWC datatable that lets executive users share cases dynamically from within an Experience Site.',
-            '[TODO: how sharing was applied, e.g. Apex creating CaseShare records, sharing sets, or a custom access model]',
-            '[TODO: any security considerations, e.g. restricting who can delegate and to whom]'
+            'Led the solution design and proof of concept. Evaluated out-of-the-box options with Salesforce (Community Plus super user access, sharing sets and delegated administration) and found none could express hierarchy-aware access across an organization and its facilities, so designed a custom Apex managed sharing model instead.',
+            'Introduced a three-tier case sharing role on each portal user: Executives see every case across their account hierarchy, Managers see all cases on their own account but not its child facilities, and Individual Contributors see only their own cases. Every user defaults to Individual Contributor, so access is only ever widened deliberately.',
+            'Built Apex that creates case sharing records on the fly based on the user’s role, backed by a batch job that keeps sharing in sync as roles and hierarchies change.',
+            'Built the Case Access Delegation page, an Aura datatable visible only to Executives, listing every active portal user across their hierarchy (with account names to tell apart same-name contacts at different facilities) so they can change colleagues’ roles themselves.',
+            'Aligned with business stakeholders to launch delegation and sharing together, so customers define their own users’ access rather than relying on PointClickCare to do it.'
         ],
-        outcome: '[TODO: e.g. removed manual sharing requests to admins]'
+        outcome:
+            'More than 300 executive users now delegate case access across their organizations themselves. PointClickCare no longer shares cases manually, saving the Support team a couple of hours every week.'
     },
     {
         id: 'canada-post-integration',
         title: 'Canada Post Address Integration',
-        context: '[TODO: client type]',
-        role: '[TODO: role]',
-        years: '[TODO: year(s)]',
-        tags: ['LWC', 'REST API', 'Apex', 'Integration', 'Data Quality'],
-        headline: '[TODO: headline result, e.g. "Fewer invalid addresses entered"]',
+        context: 'Business Banking Client',
+        role: 'Developer',
+        years: '2022',
+        tags: ['LWC', 'Screen Flow', 'Apex', 'REST API', 'Integration', 'Data Quality'],
+        headline: 'Cut address entry time by 50–80% with deliverable addresses every time',
         challenge:
-            '[TODO: e.g. users entered client addresses by hand, which led to typos and undeliverable mail.]',
+            'Staff typed client addresses into Salesforce by hand. It was slow, and typos or incomplete addresses meant mail could come back undeliverable, a real problem for a bank that has to reach its clients reliably.',
         approach: [
-            'Developed an LWC that integrates with the Canada Post API to suggest and validate addresses as users type.',
-            '[TODO: how the callout was made, e.g. Apex callout with Named Credentials]',
-            '[TODO: UX details, e.g. autocomplete dropdown, auto-filling address fields]'
+            'Built a screen flow with an embedded LWC, so address lookup slots straight into the existing data entry process and admins can keep the rest of the flow declarative.',
+            'The LWC searches addresses as the user types, calling the Canada Post AddressComplete Interactive Find API through an Apex class that handles the HTTP callout and returns the suggestions to the component.',
+            'Users pick a match from the suggestions, and the selected address fills in the address fields automatically, so nothing has to be retyped.',
+            'Every saved address comes from Canada Post’s own address data, so it is valid and deliverable by design rather than checked after the fact.'
         ],
-        outcome: '[TODO: data quality or time-saved results]'
+        outcome:
+            'Every address entered can receive mail, and manual address entry time dropped by 50–80%.'
     }
 ];
 
