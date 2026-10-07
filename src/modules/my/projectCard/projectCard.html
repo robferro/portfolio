@@ -28,6 +28,13 @@
 
                 <h3>Outcome</h3>
                 <p>{project.outcome}</p>
+
+                <template lwc:if={project.testimonials}>
+                    <h3>What customers are saying</h3>
+                    <template for:each={project.testimonials} for:item="quote">
+                        <blockquote key={quote}>“{quote}”</blockquote>
+                    </template>
+                </template>
             </section>
         </template>
 

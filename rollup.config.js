@@ -1,10 +1,19 @@
 import fs from 'node:fs';
 import lwc from '@lwc/rollup-plugin';
 import replace from '@rollup/plugin-replace';
+import serve from 'rollup-plugin-serve';
+import livereload from 'rollup-plugin-livereload';
+
+// True when running `npm run dev` (rollup -w)
+const isDev = !!process.env.ROLLUP_WATCH;
 
 // Copies src/index.html into dist/ alongside the bundle
 const copyHtml = () => ({
     name: 'copy-html',
+    buildStart() {
+        // Rebuild when index.html changes in dev mode
+        this.addWatchFile('src/index.html');
+    },
     generateBundle() {
         this.emitFile({
             type: 'asset',
@@ -23,11 +32,14 @@ export default {
     },
     plugins: [
         replace({
-            'process.env.NODE_ENV': JSON.stringify('production'),
+            'process.env.NODE_ENV': JSON.stringify(isDev ? 'development' : 'production'),
             preventAssignment: true
         }),
         // dir is relative to rootDir (src/)
         lwc({ rootDir: 'src', modules: [{ dir: 'modules' }] }),
-        copyHtml()
+        copyHtml(),
+        // Dev only: local server + auto browser refresh on save
+        isDev && serve({ contentBase: 'dist', port: 3000, open: true }),
+        isDev && livereload({ watch: 'dist' })
     ]
 };
