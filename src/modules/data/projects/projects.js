@@ -19,7 +19,8 @@ const projects = [
             'Implemented SAML single sign-on from the PointClickCare platform with a just-in-time provisioning handler that matches or creates the Account, Contact and User from assertion attributes. A login flow assigns permissions so first-time users have full access on their first page load.',
             'Designed a custom notification engine with per-group preferences (instant, daily, weekly or every post). The every-post digest runs as a self-rescheduling 5-minute batch chain with a high-water mark and an independent watchdog, since the Apex scheduler can’t repeat more often than hourly and a per-post async approach hit governor limits.',
             'Implemented custom moderation since LWR sites do not support Aura moderation rules. Keyword screening runs before a post is created (block with a friendly inline error, or allow and flag for review), member “report post”, and a moderator queue that keeps a content snapshot even after the original post is deleted.',
-            'Built for operations: one content model drives Learning, Product Updates, Events and Announcements with a 90-day review cycle; Nebula Logger captures errors across Apex, LWC and Flow; and community health dashboards track activation, engagement and return rates.'
+            'Built for operations: one content model drives Learning, Product Updates, Events and Announcements with a 90-day review cycle; Nebula Logger captures errors across Apex, LWC and Flow; and community health dashboards track activation, engagement and return rates.',
+            'Delivered AI-generated digests of forum activity for internal teams: summaries over set time windows, themes and sentiment, and early risk and adoption flags, built with Claude Skills and Salesforce MCP connectors.'
         ],
         outcome:
             'Over 400 unique visits on launch day and more than 60 discussions and comments, with strong early feedback from customers on early-access programs, notification controls and learning content.',
@@ -50,9 +51,29 @@ const projects = [
             'More than 300 executive users now delegate case access across their organizations themselves. PointClickCare no longer shares cases manually, saving the Support team a couple of hours every week.'
     },
     {
+        id: 'copado-cicd-pipeline',
+        title: 'Copado CI/CD Pipeline for Salesforce',
+        context: 'PointClickCare · DevOps',
+        role: 'Technical Lead',
+        years: '2024–2026',
+        tags: ['Copado', 'CI/CD', 'DevOps', 'Robotic Testing', 'Jira Integration', 'Release Management'],
+        headline: 'Increased Salesforce release velocity by 250% with an automated CI/CD pipeline',
+        challenge:
+            'Several teams were shipping changes to a large, heavily customized Salesforce org. With no single automated path from development to production, every release was slow, hard to coordinate, and hard to trace back to the work that drove it.',
+        approach: [
+            'Led the Copado implementation as technical lead, configuring the CI/CD pipeline so every change moves through the same promotion path from development through UAT to production.',
+            'Configured Copado Robotic Testing so regression tests run automatically as part of the release process.',
+            'Integrated Copado with Jira Cloud through webhooks, linking each user story to its deployment for end-to-end traceability.',
+            'Kept the pipeline healthy as it grew by building the UAT workflow, reconnecting development teams to the pipeline, and upgrading Copado packages each release cycle.',
+            'Put governance in place, including controls that block Copado AI from connecting to production, and presented Copado AI user-story automation at an internal AI Symposium.'
+        ],
+        outcome:
+            'Release velocity rose by 250%, and every Salesforce change now ships through one automated, tested, traceable pipeline.'
+    },
+    {
         id: 'canada-post-integration',
         title: 'Canada Post Address Integration',
-        context: 'Business Banking Client',
+        context: 'Financial Services · Business Banking',
         role: 'Developer',
         years: '2022',
         tags: ['LWC', 'Screen Flow', 'Apex', 'REST API', 'Integration', 'Data Quality'],
@@ -67,6 +88,46 @@ const projects = [
         ],
         outcome:
             'Every address entered can receive mail, and manual address entry time dropped by 50–80%.'
+    },
+    {
+        id: 'sage-intacct-integration',
+        title: 'Sage Intacct Invoice Integration',
+        context: 'Advertising · Digital Signal Processor',
+        role: 'Solution Architect',
+        years: '2021',
+        tags: ['Apex', 'SOAP API', 'Integration', 'Sage Intacct', 'Commissions'],
+        headline: 'Moved commissions from booked revenue to invoiced revenue for accurate payouts',
+        challenge:
+            'Commissions were calculated from revenue on Closed Won opportunities, but that number didn’t reflect what clients were actually billed. Credits issued to customers should reduce a rep’s commission, yet those adjustments only existed on invoices in Sage Intacct, outside Salesforce, so payouts could be overstated.',
+        approach: [
+            'Developed a custom integration that brings client invoices, including credits, from Sage Intacct into Salesforce, using Apex classes generated from Sage’s WSDL to make typed SOAP callouts.',
+            'Built a scheduled batch job that runs daily and syncs invoices by last-updated date over a rolling window, so changes and late credits are picked up without reprocessing the full invoice history.',
+            'Added an on-demand sync for a single account through a screen flow and Apex action that launches the batch job, giving users up-to-date invoice data between scheduled runs.',
+            'Invoice data lands in Salesforce ready for further processing, so commissions are calculated on invoiced revenue net of customer credits instead of Closed Won opportunity amounts.'
+        ],
+        outcome:
+            'Commission calculations now take days instead of weeks, and erroneous payouts dropped by 40%.'
+    },
+    {
+        id: 'university-applications-community',
+        title: 'University Admissions · Application Portal',
+        context: 'Higher Education',
+        role: 'Solution Consultant',
+        years: '2020',
+        tags: ['Experience Cloud', 'LWC', 'Audiences', 'FormAssembly'],
+        headline: 'End-to-end admissions on Salesforce, from first inquiry to offer letter, for thousands of applicants',
+        challenge:
+            'The university needed one system to manage the full applicant journey: capturing interest from prospective students, guiding them through a multi-part application, giving the admissions team a way to review and decide on each one, and tracking bursary awards for budgeting.',
+        approach: [
+            'Captured prospective students as leads from program interest web forms and webinar registrations, so the admissions pipeline starts at first contact.',
+            'Deployed an Experience Cloud site where starting an application automatically creates the applicant’s contact and account, using complex audiences to tailor pages and content to different applicant groups.',
+            'Built an LWC home page where applicants track their application status and see the to-dos they still need to complete.',
+            'Embedded FormAssembly forms for each part of the application, saving responses straight back to Salesforce through the out-of-the-box FormAssembly connector.',
+            'After submission, the admissions team reviews applications in Salesforce and decides who receives an offer or rejection letter.',
+            'Added a bursary application that tracks financial awards and disbursements to applicants, giving the university visibility for budgeting.'
+        ],
+        outcome:
+            'Students got a streamlined application experience, with one portal to apply, track their status and see exactly what was left to do. The admissions team saved time by reviewing, deciding and managing bursaries in a single system, with application data flowing into Salesforce automatically.'
     }
 ];
 
