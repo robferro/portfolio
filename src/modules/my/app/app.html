@@ -1,27 +1,39 @@
 <template>
     <main>
         <header class="hero">
-            <nav class="actions" aria-label="Resume and profiles">
-                <template for:each={links} for:item="link">
-                    <a key={link.url} class={link.className} href={link.url} target="_blank" rel="noopener noreferrer">{link.label}</a>
-                </template>
-            </nav>
+            <!-- Left column: who I am -->
+            <div class="hero-main">
+                <p class="eyebrow">&gt; Principal Application Engineer</p>
+                <h1>{name}</h1>
+                <p class="intro">{intro}</p>
+            </div>
 
-            <p class="eyebrow">&gt; Principal Application Engineer</p>
-            <h1>
-                {name}<br />
-            </h1>
-            <p class="intro">{intro}</p>
-            <p class="sub">{sub}</p>
+            <!-- Right column: links, skills and stats -->
+            <aside class="hero-side">
+                <nav class="actions" aria-label="Resume and profiles">
+                    <template for:each={links} for:item="link">
+                        <a key={link.url} class={link.className} href={link.url} target="_blank" rel="noopener noreferrer">{link.label}</a>
+                    </template>
+                </nav>
 
-            <ul class="stats">
-                <template for:each={stats} for:item="stat">
-                    <li key={stat.label}>
-                        <span class="stat-value">{stat.value}</span>
-                        <span class="stat-label">{stat.label}</span>
-                    </li>
-                </template>
-            </ul>
+                <!-- Wrapper is as wide as the stats; the skills chips wrap to that width -->
+                <div class="skills-stats">
+                    <ul class="skills" aria-label="Skills">
+                        <template for:each={skills} for:item="skill">
+                            <li key={skill}>{skill}</li>
+                        </template>
+                    </ul>
+
+                    <ul class="stats">
+                        <template for:each={stats} for:item="stat">
+                            <li key={stat.label}>
+                                <span class="stat-value">{stat.value}</span>
+                                <span class="stat-label">{stat.label}</span>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </aside>
         </header>
 
         <section class="grid">

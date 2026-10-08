@@ -24,9 +24,20 @@ main {
     padding: 4rem 3.5rem;
 }
 
+/* Two-column hero: who I am on the left, links/skills/stats on the right */
 .hero {
-    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
+    gap: 2rem 3rem;
+    align-items: start;
     margin-bottom: 3rem;
+}
+
+.hero-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1.5rem;
 }
 
 .eyebrow {
@@ -52,26 +63,49 @@ h1 {
 }
 
 .intro {
-    max-width: 1200px;
-    margin: 0 0 0.75rem;
-    font-size: 1.375rem;
-    line-height: 1.45;
-    color: var(--text);
+    /* ~40 characters per line: wraps into two balanced, easy-to-read lines */
+    max-width: 40ch;
+    margin: 0 0 1.25rem;
+    font-size: clamp(1.25rem, 2.2vw, 1.625rem);
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    color: #2b2b30;
 }
 
-.sub {
-    max-width: 920px;
+/* Shrinks to the width of the stats row */
+.skills-stats {
+    display: grid;
+    gap: 1.5rem;
+    width: fit-content;
+    max-width: 100%;
+}
+
+/* Skills as chips, matching the tags on the project cards.
+   contain: inline-size stops the chips from widening the wrapper,
+   so they wrap to whatever width the stats set. */
+.skills {
+    contain: inline-size;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
     margin: 0;
-    font-size: 1.125rem;
-    line-height: 1.6;
-    color: var(--muted);
+    padding: 0;
+    list-style: none;
 }
 
-/* Button bar pinned to the hero's top-right, level with the eyebrow title */
+.skills li {
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--chip-border);
+    border-radius: 999px;
+    background: var(--chip-bg);
+    color: var(--chip-text);
+    font-size: 0.8125rem;
+}
+
 .actions {
-    position: absolute;
-    top: 0;
-    right: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
@@ -117,10 +151,12 @@ h1 {
 .stats {
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-end;
     gap: 2.5rem;
-    margin: 2rem 0 0;
+    margin: 0;
     padding: 0;
     list-style: none;
+    text-align: right;
 }
 
 .stat-value {
@@ -138,7 +174,8 @@ h1 {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.25rem;
-    align-items: start;
+    /* Cards in the same row stretch to the same height */
+    align-items: stretch;
 }
 
 @media (max-width: 900px) {
@@ -146,11 +183,23 @@ h1 {
         padding: 2.5rem 1.25rem;
     }
 
-    /* On small screens, put the buttons back in the normal flow above the title */
-    .actions {
-        position: static;
+    /* Small screens: stack the columns and left-align everything */
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-side {
+        align-items: flex-start;
+    }
+
+    .actions,
+    .skills,
+    .stats {
         justify-content: flex-start;
-        margin-bottom: 1.5rem;
+    }
+
+    .stats {
+        text-align: left;
     }
 
     .grid {

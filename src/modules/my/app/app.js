@@ -8,19 +8,15 @@ export default class App extends LightningElement {
     // One-liner shown between the name and the skills
     intro = 'I build Salesforce solutions and the delivery pipelines behind them, so teams they serve get better software, faster.';
 
-    // Skills shown under the name; edit this list to change the tagline
+    // Skills shown as chips in the hero's right column
     skills = [
         'Sales Cloud',
-        'Service Cloud', 
+        'Service Cloud',
         'Experience Cloud',
         'Lightning Web Components',
         'Apex',
         'Integrations'
     ];
-
-    get sub() {
-        return this.skills.join(' · ');
-    }
 
     // Links shown as buttons in the hero; the first one is the highlighted button
     links = [
