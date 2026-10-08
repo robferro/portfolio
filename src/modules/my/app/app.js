@@ -27,7 +27,7 @@ export default class App extends LightningElement {
 
     // Headline numbers shown under the hero
     stats = [
-        { value: String(projects.length), label: 'Featured projects' },
+        { value: '25+', label: 'Projects delivered' },
         { value: '7+', label: 'Years of Experience' },
         { value: '16', label: 'Certifications' }
     ];
