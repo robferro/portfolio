@@ -1,8 +1,27 @@
 <template>
     <main>
         <header class="hero">
-            <h1>{name}</h1> 
-            <p>Salesforce Engineer · Sales Cloud · Service Cloud · Experience Cloud · Lightning Web Components · Apex · Integrations</p>
+            <nav class="actions" aria-label="Resume and profiles">
+                <template for:each={links} for:item="link">
+                    <a key={link.url} class={link.className} href={link.url} target="_blank" rel="noopener noreferrer">{link.label}</a>
+                </template>
+            </nav>
+
+            <p class="eyebrow">&gt; Principal Application Engineer</p>
+            <h1>
+                {name}<br />
+            </h1>
+            <p class="intro">{intro}</p>
+            <p class="sub">{sub}</p>
+
+            <ul class="stats">
+                <template for:each={stats} for:item="stat">
+                    <li key={stat.label}>
+                        <span class="stat-value">{stat.value}</span>
+                        <span class="stat-label">{stat.label}</span>
+                    </li>
+                </template>
+            </ul>
         </header>
 
         <section class="grid">

@@ -3,17 +3,29 @@ import { LightningElement, api } from 'lwc';
 export default class ProjectCard extends LightningElement {
     @api project;
 
-    expanded = false;
-
-    get toggleLabel() {
-        return this.expanded ? 'Show less' : 'Read more';
+    openDialog() {
+        this.refs.dialog.showModal();
+        // Stop the page behind the dialog from scrolling
+        document.body.style.overflow = 'hidden';
     }
 
-    get ariaExpanded() {
-        return String(this.expanded);
+    closeDialog() {
+        this.refs.dialog.close();
     }
 
-    handleToggle() {
-        this.expanded = !this.expanded;
+    // Clicking the dimmed backdrop (outside the dialog content) closes it
+    handleBackdropClick(event) {
+        if (event.target === this.refs.dialog) {
+            this.closeDialog();
+        }
+    }
+
+    // Fires for every close: ✕ button, backdrop click or Esc key
+    handleClose() {
+        document.body.style.overflow = '';
+    }
+
+    disconnectedCallback() {
+        document.body.style.overflow = '';
     }
 }

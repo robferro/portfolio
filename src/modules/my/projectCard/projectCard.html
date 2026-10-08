@@ -1,9 +1,8 @@
 <template>
     <article class="card">
         <header>
-            <p class="meta">{project.context} · {project.years}</p>
+            <p class="meta">{project.context} · {project.years} · {project.role}</p>
             <h2>{project.title}</h2>
-            <p class="role">{project.role}</p>
         </header>
 
         <p class="headline">{project.headline}</p>
@@ -14,20 +13,42 @@
             </template>
         </ul>
 
-        <template lwc:if={expanded}>
-            <section class="details">
+        <button class="open" aria-haspopup="dialog" onclick={openDialog}>
+            Read case study →
+        </button>
+    </article>
+
+    <!-- Case study dialog: native <dialog> gives backdrop, Esc-to-close and focus handling -->
+    <dialog lwc:ref="dialog" class="dialog" aria-labelledby="dialog-title" onclick={handleBackdropClick} onclose={handleClose}>
+        <div class="dialog-inner">
+            <header class="dialog-header">
+                <div>
+                    <p class="meta">{project.context} · {project.years} · {project.role}</p>
+                    <h2 id="dialog-title">{project.title}</h2>
+                    <p class="headline">{project.headline}</p>
+                </div>
+                <button class="close" aria-label="Close case study" onclick={closeDialog}>✕</button>
+            </header>
+
+            <div class="dialog-body">
+                <ul class="tags">
+                    <template for:each={project.tags} for:item="tag">
+                        <li key={tag}>{tag}</li>
+                    </template>
+                </ul>
+
                 <h3>Challenge</h3>
                 <p>{project.challenge}</p>
 
                 <h3>Approach</h3>
-                <ul>
+                <ul class="approach">
                     <template for:each={project.approach} for:item="step">
                         <li key={step}>{step}</li>
                     </template>
                 </ul>
 
                 <h3>Outcome</h3>
-                <p>{project.outcome}</p>
+                <p class="outcome">{project.outcome}</p>
 
                 <template lwc:if={project.testimonials}>
                     <h3>What customers are saying</h3>
@@ -35,11 +56,7 @@
                         <blockquote key={quote}>“{quote}”</blockquote>
                     </template>
                 </template>
-            </section>
-        </template>
-
-        <button class="toggle" aria-expanded={ariaExpanded} onclick={handleToggle}>
-            {toggleLabel}
-        </button>
-    </article>
+            </div>
+        </div>
+    </dialog>
 </template>

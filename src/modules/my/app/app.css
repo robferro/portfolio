@@ -1,43 +1,158 @@
 :host {
+    /* Theme: inherited by child components through the shadow DOM */
+    --accent: #e5a23a;          /* brand accent: borders, gradient, hover */
+    --accent-deep: #b45309;     /* gradient end */
+    --accent-text: #a16207;     /* readable accent for small text on white */
+    --chip-bg: #fdf4e3;
+    --chip-text: #8a5a0f;
+    --chip-border: #f3d9a8;
+    --text: #111114;
+    --muted: #5f5f66;
+    --border: #e6e6ea;
+    --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
     display: block;
     min-height: 100vh;
-    background: #f3f3f3;
+    background: #fff;
     font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
-    color: #181818;
+    color: var(--text);
 }
 
 main {
     max-width: 2000px;
     margin: 0 auto;
-    padding: 3rem 1.5rem;
+    padding: 4rem 3.5rem;
 }
 
 .hero {
-    margin-bottom: 2rem;
-    text-align: center; 
+    position: relative;
+    margin-bottom: 3rem;
 }
 
-.hero h1 {
-    margin: 0 0 0.5rem;
-    font-size: 2.5rem;
-    color: #032d60;
-}
-
-.hero p {
+.eyebrow {
     margin: 0;
-    color: #706e6b;
+    font-family: var(--mono);
+    font-size: 0.875rem;
+    color: var(--accent-text);
+}
+
+h1 {
+    margin: 0.75rem 0 1rem;
+    font-size: clamp(2.25rem, 5vw, 3.5rem); 
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+}
+
+.grad {
+    background: linear-gradient(90deg, var(--accent), var(--accent-deep));
+    -webkit-background-clip: text;  
+    background-clip: text;
+    color: transparent;
+}
+
+.intro {
+    max-width: 1200px;
+    margin: 0 0 0.75rem;
+    font-size: 1.375rem;
+    line-height: 1.45;
+    color: var(--text);
+}
+
+.sub {
+    max-width: 920px;
+    margin: 0;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+/* Button bar pinned to the hero's top-right, level with the eyebrow title */
+.actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: #fff;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn:hover {
+    border-color: var(--accent);
+    color: var(--accent-text);
+}
+
+.btn-primary {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--text);
+}
+
+.btn-primary:hover {
+    background: var(--accent-deep);
+    border-color: var(--accent-deep);
+    color: #fff;
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--accent-deep);
+    outline-offset: 2px;
+}
+
+.stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    margin: 2rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.stat-label {
+    font-size: 0.8125rem;
+    color: var(--muted);
 }
 
 .grid {
     display: grid;
-    /* Always 2 equal columns; card width = (main max-width - padding - gap) / 2 */
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.5rem;
+    gap: 1.25rem;
     align-items: start;
 }
 
-/* Stack to 1 column on tablets/phones */
 @media (max-width: 900px) {
+    main {
+        padding: 2.5rem 1.25rem;
+    }
+
+    /* On small screens, put the buttons back in the normal flow above the title */
+    .actions {
+        position: static;
+        justify-content: flex-start;
+        margin-bottom: 1.5rem;
+    }
+
     .grid {
         grid-template-columns: 1fr;
     }

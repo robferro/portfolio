@@ -13,6 +13,14 @@ const copyHtml = () => ({
     buildStart() {
         // Rebuild when index.html changes in dev mode
         this.addWatchFile('src/index.html');
+
+        // The LWC plugin doesn't register component CSS with the watcher,
+        // so CSS-only edits would never trigger a rebuild. Watch them explicitly.
+        for (const file of fs.readdirSync('src/modules', { recursive: true })) {
+            if (String(file).endsWith('.css')) {
+                this.addWatchFile(`src/modules/${file}`);
+            }
+        }
     },
     generateBundle() {
         this.emitFile({

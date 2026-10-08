@@ -150,8 +150,8 @@ const projects = [
     },
     {
         id: 'university-applications-community',
-        title: 'University Admissions · Application Portal',
-        context: 'Higher Education',
+        title: 'Application Portal',
+        context: 'Higher Education · University Admissions',
         role: 'Solution Consultant',
         years: '2020',
         tags: ['Experience Cloud', 'LWC', 'Audiences', 'FormAssembly'],
