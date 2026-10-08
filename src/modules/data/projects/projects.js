@@ -31,6 +31,26 @@ const projects = [
         ]
     },
     {
+        id: 'jira-service-cloud-integration',
+        title: 'Service Cloud to Jira Escalation Integration',
+        context: 'PointClickCare · Product Escalation',
+        role: 'Senior Developer',
+        years: '2025',
+        tags: ['Apex', 'Queueable Apex', 'Triggers', 'REST API', 'Boomi', 'Jira', 'Service Cloud', 'Integration'],
+        headline: 'Connected Customer Support and Product Engineering with two-way case escalation into Jira',
+        challenge:
+            'When a customer case revealed a product defect, Support had no direct path to Product Engineering. Escalations were handed off by hand, the Salesforce case and the engineering work lived in separate systems, and back-and-forth updates were slow and easy to lose.',
+        approach: [
+            'Built an Apex callout framework so Support can escalate a case from Salesforce and generate a ticket on the right product team’s Jira board.',
+            'Followed a trigger and handler pattern on the Case object, passing the work to a Queueable class that makes the HTTP callouts asynchronously so case saves stay fast and within governor limits.',
+            'Routed callouts through Boomi middleware, which maps each case to the correct Jira project based on the Salesforce product selected, keeping routing rules out of the Apex code.',
+            'Extended the sync to Case Comments and Content Documents, so Support and Product Engineers can trade updates and attachments while working through a defect, without leaving their own tools.',
+            'Added a switch to turn the integration off for maintenance or incidents, and applied the same callout framework to Opsgenie support alerts.'
+        ],
+        outcome:
+            'Support can escalate a product defect to engineering in a few clicks, and every comment and attachment stays in sync between the Salesforce case and the Jira ticket until the issue is resolved.'
+    },
+    {
         id: 'case-access-delegation',
         title: 'Case Access Delegation',
         context: 'PointClickCare · Support Portal',
@@ -69,6 +89,26 @@ const projects = [
         ],
         outcome:
             'Release velocity rose by 250%, and every Salesforce change now ships through one automated, tested, traceable pipeline.'
+    },
+    {
+        id: 'omni-channel-underwriting-routing',
+        title: 'Omni-Channel Underwriting Case Routing',
+        context: 'Financial Services · Business Banking',
+        role: 'Developer',
+        years: '2023',
+        tags: ['Omni-Channel', 'Skills-Based Routing', 'Apex', 'Flow', 'Service Cloud', 'Sales Cloud'],
+        headline: 'Skills-based routing that sped up loan underwriting from opportunity to close',
+        challenge:
+            'Selling a loan meant moving each lending opportunity through underwriting, where several teams each had to review it and gather information depending on the deal’s details. Creating and assigning that work by hand was slow, and every delay pushed back closing the loan for the customer.',
+        approach: [
+            'Designed a reusable framework that lets the business define templates of the cases an opportunity needs during underwriting, along with the opportunity criteria that trigger each one, without code changes.',
+            'Built an opportunity trigger and handler that call a work item generator helper class, which evaluates the opportunity’s template and creates each case only when its conditions are met.',
+            'Made generation idempotent and change-driven: the helper creates at most one case per template work item and only re-evaluates when the relevant opportunity fields change, so re-saves never create duplicates.',
+            'Configured skills-based Omni-Channel routing: a record-triggered flow on Case launches an Omni-Channel flow that assigns skills based on opportunity values, routing each case to the right team’s queue and agent.',
+            'Set agent capacity by team, so work is spread evenly and nobody is overloaded while cases keep flowing.'
+        ],
+        outcome:
+            'Hundreds of underwriting cases are routed automatically each month to the right people, helping the business close lending opportunities as fast as possible for the customer.'
     },
     {
         id: 'canada-post-integration',
