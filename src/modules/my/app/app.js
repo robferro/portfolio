@@ -6,7 +6,7 @@ export default class App extends LightningElement {
     projects = projects;
 
     // One-liner shown between the name and the skills
-    intro = 'I build Salesforce solutions and the delivery pipelines behind them, so teams they serve get better software, faster.';
+    intro = 'I build Salesforce solutions for enterprises, and the pipelines that let engineers ship them with confidence.';
 
     // Skills shown as chips in the hero's right column
     skills = [

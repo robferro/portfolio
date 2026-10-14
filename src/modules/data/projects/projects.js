@@ -12,6 +12,7 @@ const projects = [
         challenge:
             'To create a seamless, centralized community hub that empowers customers and PCC teams to connect, share knowledge, advocate and drive meaningful outcomes - fueling product innovation and enabling every customer to realize the full value of PointClickCare.',
         approach: [
+            'Delivered AI-generated digests of forum activity for internal teams: summaries over set time windows, themes and sentiment, and early risk and adoption flags, built with Claude Skills and Salesforce MCP connectors.',
             'Architected the community as an Experience Cloud LWR site with ~30 custom LWCs backed by Apex controllers. LWR site cannot leverage standard Chatter components or customizable notification emails, so the forum UI and member notifications were built from scratch on top of native Chatter object.',
             'Built discussion forums on Chatter via ConnectApi, with a companion object for metadata Chatter can’t store (category, interest, industry). Members can post, comment, like, @mention, attach files and run polls, and moderators can pin one post per category.',
             'Personalized content: an intake profile captures each member’s interests, care setting and country, and all content queries filter on it. Shared global value sets keep content tags and member interests identical, and a member’s interests automatically drive their group memberships via Apex triggers.',
@@ -19,8 +20,7 @@ const projects = [
             'Implemented SAML single sign-on from the PointClickCare platform with a just-in-time provisioning handler that matches or creates the Account, Contact and User from assertion attributes. A login flow assigns permissions so first-time users have full access on their first page load.',
             'Designed a custom notification engine with per-group preferences (instant, daily, weekly or every post). The every-post digest runs as a self-rescheduling 5-minute batch chain with a high-water mark and an independent watchdog, since the Apex scheduler can’t repeat more often than hourly and a per-post async approach hit governor limits.',
             'Implemented custom moderation since LWR sites do not support Aura moderation rules. Keyword screening runs before a post is created (block with a friendly inline error, or allow and flag for review), member “report post”, and a moderator queue that keeps a content snapshot even after the original post is deleted.',
-            'Built for operations: one content model drives Learning, Product Updates, Events and Announcements with a 90-day review cycle; Nebula Logger captures errors across Apex, LWC and Flow; and community health dashboards track activation, engagement and return rates.',
-            'Delivered AI-generated digests of forum activity for internal teams: summaries over set time windows, themes and sentiment, and early risk and adoption flags, built with Claude Skills and Salesforce MCP connectors.'
+            'Built for operations: one content model drives Learning, Product Updates, Events and Announcements with a 90-day review cycle; Nebula Logger captures errors across Apex, LWC and Flow; and community health dashboards track activation, engagement and return rates.'
         ],
         outcome:
             'Over 400 unique visits on launch day and more than 60 discussions and comments, with strong early feedback from customers on early-access programs, notification controls and learning content.',
